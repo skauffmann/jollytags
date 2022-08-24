@@ -1,4 +1,4 @@
-import { Heading, VStack } from '@chakra-ui/react';
+import { Box, Heading, VStack } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -24,7 +24,11 @@ const Home: NextPage = () => {
       <VStack spacing={6}>
         <Heading mb={10}>Jollytags</Heading>
         <TagConfigurationForm onSubmit={setTagConfiguration} />
-        {tagConfiguration && <PDFTagViewer {...tagConfiguration} />}
+        {tagConfiguration && (
+          <Box p={6} w="full">
+            <PDFTagViewer {...tagConfiguration} />
+          </Box>
+        )}
       </VStack>
     </>
   );

@@ -1,32 +1,7 @@
-import { Box, Grid, GridItem, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Grid } from '@chakra-ui/react';
+import { useFormContext } from 'react-hook-form';
 import { PageConfiguration } from '../../constants/page-configurations';
-
-interface TagItemConfigurationPreviewProps {
-  offset: number;
-  tagCount: number;
-  tagIndex: number;
-}
-
-const TagItemConfigurationPreview = ({
-  tagIndex,
-  offset,
-  tagCount,
-}: TagItemConfigurationPreviewProps) => {
-  const isFilled = tagIndex >= offset && tagIndex < offset + tagCount;
-  return (
-    <GridItem
-      w="100%"
-      h="10"
-      border="1px var(--chakra-colors-gray-400) solid"
-      bg={isFilled ? 'gray.300' : undefined}
-      color={isFilled ? 'gray.900' : undefined}
-    >
-      <VStack justifyContent="center" alignItems="center" h="full">
-        <Text>{tagIndex + 1}</Text>
-      </VStack>
-    </GridItem>
-  );
-};
+import { TagItemConfigurationPreview } from './tag-item-configuration-preview';
 
 interface TagConfigurationPreviewProps {
   pageConfiguration: PageConfiguration;
@@ -40,6 +15,9 @@ export const TagConfigurationPreview = ({
   offset,
 }: TagConfigurationPreviewProps) => {
   const numberOfTags = pageConfiguration.rows * pageConfiguration.columns;
+  const { setValue } = useFormContext();
+  const setOffset = (newOffset: number) => setValue('offset', newOffset);
+
   return (
     <Box>
       <Grid
@@ -52,6 +30,7 @@ export const TagConfigurationPreview = ({
             tagIndex={tagIndex}
             offset={offset}
             tagCount={tagCount}
+            onClick={setOffset}
           />
         ))}
       </Grid>

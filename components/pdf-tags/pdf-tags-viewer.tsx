@@ -7,7 +7,7 @@ export const PDFTagViewer = ({
   offset,
   tagsContent,
 }: ITagConfiguration) => (
-  <PDFViewer width={500} height={800}>
+  <PDFViewer width="100%" height={800}>
     <PDFTagsDocument
       pageConfigurationId={pageConfigurationId}
       tagsContent={tagsContent}
