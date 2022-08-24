@@ -27,7 +27,6 @@ export const InputOffset = () => {
   const increment = () => setValue('offset', offset + 1);
   const decrement = () => setValue('offset', offset - 1);
 
-  console.log({ errors });
   return (
     <FormControl isInvalid={isError}>
       <FormLabel>Offset</FormLabel>
