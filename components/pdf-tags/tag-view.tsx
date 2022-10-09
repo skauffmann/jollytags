@@ -11,7 +11,7 @@ const getTextFontSize = (text: string) => {
     return '16px';
   }
 
-  if (text.length < 25) {
+  if (text.length < 22) {
     return '14px';
   }
 

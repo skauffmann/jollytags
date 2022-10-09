@@ -1,4 +1,5 @@
-import { Button, HStack, Stack, VStack } from '@chakra-ui/react';
+import { Button, IconButton, Stack, VStack } from '@chakra-ui/react';
+import { FaPlus } from 'react-icons/fa';
 import { FormProvider, useForm } from 'react-hook-form';
 import { PageConfigurations } from '../../constants/page-configurations';
 import { ITagConfiguration } from '../../types';
@@ -16,14 +17,26 @@ export function TagConfigurationForm({ onSubmit }: TagConfigurationFormProps) {
     defaultValues: {
       offset: 0,
       pageConfigurationId: Object.keys(PageConfigurations)[0],
+      tagsContent: ['1', '2'],
     },
   });
 
-  const [pageConfigurationId, offset] = methods.watch([
+  const [pageConfigurationId, offset, tagsContent] = methods.watch([
     'pageConfigurationId',
     'offset',
+    'tagsContent',
   ]);
   const pageConfiguration = PageConfigurations[pageConfigurationId];
+
+  const handleAddTag = () => {
+    methods.setValue('tagsContent', [...tagsContent, '']);
+  };
+  const handleRemoveTag = (index: number) => {
+    methods.setValue(
+      'tagsContent',
+      tagsContent.filter((_, i) => i !== index)
+    );
+  };
 
   return (
     <FormProvider {...methods}>
@@ -36,7 +49,18 @@ export function TagConfigurationForm({ onSubmit }: TagConfigurationFormProps) {
           <VStack spacing={6}>
             <SelectPageConfiguration />
             <InputOffset />
-            <InputTag />
+            {tagsContent.map((_, index) => (
+              <InputTag
+                key={index}
+                index={index}
+                onRemove={() => handleRemoveTag(index)}
+              />
+            ))}
+            <IconButton
+              icon={<FaPlus />}
+              onClick={handleAddTag}
+              aria-label="Add tag"
+            />
           </VStack>
           <TagConfigurationPreview
             pageConfiguration={pageConfiguration}

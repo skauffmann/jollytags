@@ -17,6 +17,7 @@ export const PDFTagsDocument = ({
   const pageConfiguration = PageConfigurations[pageConfigurationId];
   const styles = StyleSheet.create(pageConfiguration.styles as ReactPDF.Styles);
 
+  console.log(tagsContent);
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -25,7 +26,9 @@ export const PDFTagsDocument = ({
             {Array.from({ length: pageConfiguration.columns }, (_, column) => {
               const rowNumber = row * pageConfiguration.columns + column;
               const tagContent =
-                offset >= rowNumber ? tagsContent[rowNumber - offset] : '';
+                rowNumber >= offset
+                  ? tagsContent[rowNumber - offset]
+                  : '' ?? '';
               return <TagView styles={styles} text={tagContent} key={column} />;
             })}
           </View>
