@@ -44,7 +44,7 @@ export function TagConfigurationForm({ onSubmit }: TagConfigurationFormProps) {
         <Stack
           direction={['column', 'row']}
           spacing={[6, 12]}
-          alignItems="center"
+          alignItems="start"
         >
           <VStack spacing={6}>
             <SelectPageConfiguration />
@@ -65,7 +65,7 @@ export function TagConfigurationForm({ onSubmit }: TagConfigurationFormProps) {
           <TagConfigurationPreview
             pageConfiguration={pageConfiguration}
             offset={offset}
-            tagCount={1}
+            tagCount={tagsContent.length}
           />
         </Stack>
         <Button type="submit">Generate</Button>
