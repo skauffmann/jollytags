@@ -17,7 +17,7 @@ export function TagConfigurationForm({ onSubmit }: TagConfigurationFormProps) {
     defaultValues: {
       offset: 0,
       pageConfigurationId: Object.keys(PageConfigurations)[0],
-      tagsContent: ['1', '2'],
+      tagsContent: [''],
     },
   });
 
